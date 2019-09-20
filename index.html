@@ -2,15 +2,9 @@
 <html>
 <head>
 	<title></title>
-	<style type="text/css">
-		h1 {
-			text-align:center;
-		}
-	</style>
+	<style type="text/css">h1 {text-align:center;}</style>
 </head>
-
 <body>
-
 <h1>Vimeo Video</h1>
 <iframe src="https://player.vimeo.com/video/56282283" width="100%;" height="300" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
 
@@ -24,25 +18,32 @@
 
   player.on('play', function() {
 
+	console.log('played the video!');
+
 		var timesRun = 0;
 		var interval = setInterval(function(){
 			player.getDuration().then(function(duration) {
 				player.getCurrentTime().then(function(seconds) {
 
-					if (seconds <= duration && seconds !== duration) {
-						// seconds = the current playback position
+					if (seconds <= duration) {
+
+						// second as whole number
 						let ioTime = Math.trunc(seconds);
+
 						if (ioTime == 5) {
 							console.log("Fire here at: " + Math.trunc(seconds) +" seconds");
 						}
+
 						console.log(seconds);
 					}
 
 					// Stops interval - if timesRun equals duration count
 			    timesRun += 1;
 			    if(timesRun === duration){
+
 			    	console.log("End Video");
-		        clearInterval(interval);
+
+		        	clearInterval(interval);
 			    }
 			    
 				}).catch(function(error) {
@@ -54,8 +55,6 @@
 			    console.log(error);
 			});
 		}, 1000);
-	
-  	console.log('played the video!');
   });
 </script>
 </body>
